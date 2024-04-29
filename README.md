@@ -18,17 +18,25 @@ To install these dependencies, run the following command in your terminal:
 
 ```bash
 npm install openai dotenv next ai
+```
+
+```bash
 npx shadcn-ui@latest init
+```
+
+```bash
 npx shadcn-ui@latest add button
+```
+
+```bash
 npx shadcn-ui@latest add input
+```
 
 export OPENAI_API_KEY='Your open ai key'
 echo "export OPENAI_API_KEY='Your open ai key0'" >> ~/.zshrc (If you use zshrc for your profile)
 
-
+```bash
 npm run dev
-
-
 ```
 
 Contributing
@@ -39,3 +47,7 @@ Distribute under the MIT License. See LICENSE for more information.
 
 Contact
 Arvin Teymouri - teymouri.arvin@gmail.com
+
+```
+
+```
