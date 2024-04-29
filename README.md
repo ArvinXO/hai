@@ -1,6 +1,4 @@
-# Project Name
-
-HAI- AI Chat
+# HAI- AI Chat
 
 Open AI chat bot - Vercel Deployable
 
@@ -12,6 +10,7 @@ This project requires the following dependencies:
 - `dotenv`: Used to load environment variables from a `.env.local` file. Necessary for securely handling the OpenAI API key.
 - `next`: The core package for a Next.js application. Necessary for running the application.
 - `ai`: Provides the `OpenAIStream` and `StreamingTextResponse` functions. (Please verify the package name and its purpose)
+- `shadcn`: shadcn is a collection of beautifully designed, accessible, and customizable React components that you can use to build modern web applications with Next. js. With Shadcn, you can quickly and easily create user interfaces that are both stylish and functional
 
 ## Setup and Installation
 
@@ -29,6 +28,9 @@ echo "export OPENAI_API_KEY='Your open ai key0'" >> ~/.zshrc (If you use zshrc f
 
 npm run dev
 
+
+```
+
 Contributing
 Contributions are always welcome! Please read the contribution guidelines first.
 
@@ -37,4 +39,3 @@ Distribute under the MIT License. See LICENSE for more information.
 
 Contact
 Arvin Teymouri - teymouri.arvin@gmail.com
-```
