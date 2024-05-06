@@ -18,6 +18,16 @@ const config = {
       },
     },
     extend: {
+      transitionDelay: {
+        "0": "0ms",
+        "2000": "2000ms",
+        "3000": "3000ms",
+        "4000": "4000ms",
+      },
+      backdropFilter: {
+        none: "none",
+        blur: "blur(20px)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,7 +84,16 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  variants: {
+    extend: {
+      backdropFilter: ["responsive"], // Add other variants if needed
+    },
+  },
+  plugins: [
+    require("@tailwindcss/postcss7-compat"),
+    require("tailwindcss-filters"),
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
 
 export default config;
