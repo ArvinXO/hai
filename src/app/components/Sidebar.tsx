@@ -1,16 +1,17 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, MessageSquare } from "lucide-react";
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { MessageSquare, Moon, Sun, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface SidebarProps {
   isOpen: boolean;
-  onToggle: () => void;
   isDarkMode: boolean;
+  onToggle: () => void;
   onThemeToggle: () => void;
 }
 
-export const Sidebar = ({ isOpen, onToggle, isDarkMode, onThemeToggle }: SidebarProps) => {
+export function Sidebar({ isOpen, isDarkMode, onToggle, onThemeToggle }: SidebarProps) {
   return (
     <>
       <Button
@@ -24,7 +25,11 @@ export const Sidebar = ({ isOpen, onToggle, isDarkMode, onThemeToggle }: Sidebar
 
       <AnimatePresence>
         {isOpen && (
-          <div
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className={`
               fixed inset-0 transition-opacity duration-300 md:hidden backdrop-blur-sm
               ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
@@ -37,7 +42,7 @@ export const Sidebar = ({ isOpen, onToggle, isDarkMode, onThemeToggle }: Sidebar
 
       <AnimatePresence>
         {isOpen && (
-          <aside
+          <motion.aside
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
@@ -105,9 +110,9 @@ export const Sidebar = ({ isOpen, onToggle, isDarkMode, onThemeToggle }: Sidebar
                 {isDarkMode ? 'Light Mode' : 'Dark Mode'}
               </Button>
             </div>
-          </aside>
+          </motion.aside>
         )}
       </AnimatePresence>
     </>
   );
-};
+}

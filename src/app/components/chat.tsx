@@ -130,10 +130,14 @@ export function Chat() {
               </ul>
               
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   setIsTyping(true);
-                  handleSubmit(e).finally(() => setIsTyping(false));
+                  try {
+                    await handleSubmit(e);
+                  } finally {
+                    setIsTyping(false);
+                  }
                 }}
                 className={`mt-4 flex w-full max-w-4xl mx-auto items-end gap-2 p-2 rounded-xl transition-all duration-500 ease-in-out ${
                   isDarkMode ? 'bg-gray-800/50' : 'bg-white/80'
