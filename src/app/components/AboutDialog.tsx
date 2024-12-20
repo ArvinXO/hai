@@ -2,6 +2,7 @@ import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
+import Image from "next/image";
 
 export const AboutDialog = () => {
   return (
@@ -15,7 +16,14 @@ export const AboutDialog = () => {
       <DialogContent className="sm:max-w-[425px] bg-purple-900/90 backdrop-blur-lg text-white">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <img src="/assets/chatbot.svg" alt="HAI Chat" className="w-6 h-6" />
+            <div className="w-6 h-6 relative">
+              <Image
+                src="/assets/chatbot.svg"
+                alt="HAI Chat"
+                fill
+                className="object-contain"
+              />
+            </div>
             About HAI Chat
           </DialogTitle>
         </DialogHeader>

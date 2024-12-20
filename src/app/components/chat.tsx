@@ -8,6 +8,7 @@ import { AssistantMessage } from "./AssitantMessage";
 import { UserMessage } from "./UserMessage";
 import { Sidebar } from "./Sidebar";
 import { Send } from "lucide-react";
+import Image from "next/image";
 
 export function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -82,14 +83,19 @@ export function Chat() {
               >
                 {!messages.length ? (
                   <div className="flex flex-col items-center justify-center h-full text-center opacity-60">
-                    <div className="w-12 h-12 md:w-16 md:h-16 mb-4">
-                      <img src="/assets/chatbot.svg" alt="Chat Bot" className="w-full h-full" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 mb-4 relative">
+                      <Image
+                        src="/assets/chatbot.svg"
+                        alt="Chat Bot"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                     <h3 className={`text-lg md:text-xl font-semibold mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-900'}`}>
                       Welcome to HAI Chat!
                     </h3>
                     <p className={`text-sm max-w-md ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Start a conversation by typing a message below. I'm here to help!
+                      Start a conversation by typing a message below. I&apos;m here to help!
                     </p>
                   </div>
                 ) : (
