@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Moon, Sun, X } from "lucide-react";
+import { MessageSquare, Moon, Sun, X, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface SidebarProps {
@@ -20,7 +20,7 @@ export function Sidebar({ isOpen, isDarkMode, onToggle, onThemeToggle }: Sidebar
         className="fixed top-4 left-4 z-50 md:hidden"
         onClick={onToggle}
       >
-        {isOpen ? <X /> : <Menu />}
+        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
 
       <AnimatePresence>
