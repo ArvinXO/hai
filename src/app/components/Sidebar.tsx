@@ -1,56 +1,113 @@
-import React, { useState } from "react";
-import { MdClose, MdMenu } from "react-icons/md";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export const Sidebar = () => {
-  const [isVisible, setIsVisible] = useState(true);
+interface SidebarProps {
+  isOpen: boolean;
+  onToggle: () => void;
+  isDarkMode: boolean;
+  onThemeToggle: () => void;
+}
 
+export const Sidebar = ({ isOpen, onToggle, isDarkMode, onThemeToggle }: SidebarProps) => {
   return (
-    <div className="relative flex items-center">
-      <div
-        className={`transform transition-transform duration-500 ease-in-out ${
-          isVisible ? "translate-x-0" : "-translate-x-full"
-        }`}
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="fixed top-4 left-4 z-50 md:hidden"
+        onClick={onToggle}
       >
-        <aside className="w-64 bg-white bg-opacity-25 backdrop-blur-md p-4 rounded-r-xl overflow-auto flex-grow">
-          <h2 className="text-lg font-bold mb-2 pr-20 text-white text-center">
-            History
-          </h2>
-          <ul>
-            {
-              //Provide a list of messages
-              [
-                "Hello",
-                "How are you?",
-                "I am fine, thank you",
-                "How can I help you today?",
-              ].map((message, index) => (
-                <li
-                  key={index}
-                  className="p-2 bg-gray-100 rounded-xl mb-2 hover:bg-gray-400 transition-colors duration-200"
-                >
-                  {message}
+        {isOpen ? <X /> : <Menu />}
+      </Button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <div
+            className={`
+              fixed inset-0 transition-opacity duration-300 md:hidden backdrop-blur-sm
+              ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+              ${isDarkMode ? 'bg-black/50' : 'bg-gray-600/30'}
+            `}
+            onClick={() => onToggle()}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isOpen && (
+          <aside
+            initial={{ x: -300 }}
+            animate={{ x: 0 }}
+            exit={{ x: -300 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className={`
+              fixed md:static inset-y-0 left-0 w-64 transform transition-transform duration-300 ease-in-out
+              ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+              flex flex-col border-r
+              ${isDarkMode 
+                ? 'bg-gray-900 border-purple-800/20 text-white' 
+                : 'bg-white border-gray-200 text-gray-900'
+              }
+            `}
+          >
+            <div className={`flex items-center justify-between p-4 border-b ${
+              isDarkMode ? 'border-purple-800/20' : 'border-gray-200'
+            }`}>
+              <h2 className="text-xl font-semibold">HAI Chat</h2>
+              <button
+                onClick={onToggle}
+                className={`p-2 rounded-lg md:hidden
+                  ${isDarkMode 
+                    ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                    : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                  }
+                `}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <nav className="flex-1 p-4">
+              <ul className="space-y-2">
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`w-full justify-start gap-2
+                      ${isDarkMode
+                        ? 'text-gray-300 hover:text-white hover:bg-gray-800'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                      }
+                    `}
+                  >
+                    <MessageSquare size={20} />
+                    New Chat
+                  </Button>
                 </li>
-              ))
-            }
-          </ul>
-        </aside>
-        {isVisible && (
-          <button
-            onClick={() => setIsVisible(!isVisible)}
-            className="text-2xl rounded-r-xl hover:bg-orange-600 absolute top-1/2 right-[-10%] transform -translate-y-1/2 p-6 py-20 translate-x-1/2 bg-orange-500"
-          >
-            <MdClose color="white" />
-          </button>
+              </ul>
+            </nav>
+
+            <div className={`border-t p-4 space-y-2
+              ${isDarkMode ? 'border-gray-700/20' : 'border-gray-200'}
+            `}>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2
+                  ${isDarkMode
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                  }
+                `}
+                onClick={onThemeToggle}
+              >
+                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+              </Button>
+            </div>
+          </aside>
         )}
-        {!isVisible && (
-          <button
-            onClick={() => setIsVisible(!isVisible)}
-            className={`text-2xl rounded-r-xl hover:bg-orange-600 absolute top-1/2 right-[-10%] transform -translate-y-1/2 p-6 py-20 translate-x-1/2  bg-orange-500`}
-          >
-            <MdMenu color="purple" />
-          </button>
-        )}
-      </div>
-    </div>
+      </AnimatePresence>
+    </>
   );
 };
